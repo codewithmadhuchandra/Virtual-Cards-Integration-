@@ -20,7 +20,7 @@ A Django application that enables users to create virtual cards for invoices and
 1. Clone the repository:
 ```bash
 git clone https://github.com/codewithmadhuchandra/Virtual-Cards-Integration-.git
-cd vc_mm
+cd .\Virtual-Cards-Integration-\
 ```
 
 2. Create and activate a virtual environment:
