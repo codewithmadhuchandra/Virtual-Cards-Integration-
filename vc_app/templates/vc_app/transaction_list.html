@@ -1,0 +1,38 @@
+{% extends 'vc_app/base.html' %}
+
+{% block title %}Transactions{% endblock %}
+
+{% block content %}
+<h1>Transactions</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Card Number</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.id }}</td>
+            <td>{{ transaction.virtual_card.card_number }}</td>
+            <td>${{ transaction.amount }}</td>
+            <td>{{ transaction.get_status_display }}</td>
+            <td>{{ transaction.transaction_date|date:"Y-m-d H:i" }}</td>
+            <td>{{ transaction.description|default:"-" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No transactions found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'vc_app:virtual_card_list' %}" class="button">Back to Virtual Cards</a>
+{% endblock %} 

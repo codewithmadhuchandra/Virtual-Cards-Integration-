@@ -1,0 +1,38 @@
+{% extends 'vc_app/base.html' %}
+
+{% block title %}Virtual Cards{% endblock %}
+
+{% block content %}
+<h1>Virtual Cards</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Card Number</th>
+            <th>Invoice Number</th>
+            <th>Expiry Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for card in virtual_cards %}
+        <tr>
+            <td>{{ card.card_number }}</td>
+            <td>{{ card.invoice.invoice_number }}</td>
+            <td>{{ card.expiry_date|date:"Y-m-d" }}</td>
+            <td>{% if card.is_active %}Active{% else %}Inactive{% endif %}</td>
+            <td>
+                <a href="{% url 'vc_app:transaction_create' card.id %}" class="button">Make Payment</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No virtual cards found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'vc_app:invoice_list' %}" class="button">Back to Invoices</a>
+{% endblock %} 

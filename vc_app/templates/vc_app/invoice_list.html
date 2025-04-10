@@ -1,0 +1,41 @@
+{% extends 'vc_app/base.html' %}
+
+{% block title %}Invoices{% endblock %}
+
+{% block content %}
+<h1>Invoices</h1>
+<a href="{% url 'vc_app:invoice_create' %}" class="button">Create New Invoice</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Invoice Number</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice.invoice_number }}</td>
+            <td>${{ invoice.amount }}</td>
+            <td>{{ invoice.get_status_display }}</td>
+            <td>{{ invoice.created_at|date:"Y-m-d H:i" }}</td>
+            <td>
+                {% if not invoice.virtual_card %}
+                <a href="{% url 'vc_app:virtual_card_create' invoice.id %}" class="button">Create Virtual Card</a>
+                {% else %}
+                <span>Card Created</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No invoices found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %} 

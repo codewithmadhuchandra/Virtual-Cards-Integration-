@@ -1,0 +1,36 @@
+{% extends 'vc_app/base.html' %}
+
+{% block title %}Make Payment{% endblock %}
+
+{% block content %}
+<h1>Make Payment with Card {{ virtual_card.card_number }}</h1>
+
+<div class="payment-info">
+    <p><strong>Invoice Amount:</strong> ${{ virtual_card.invoice.amount }}</p>
+    <p><strong>Remaining Amount:</strong> ${{ remaining_amount }}</p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_amount">Amount:</label>
+        {{ form.amount }}
+        {% if form.amount.errors %}
+        <div class="error">{{ form.amount.errors }}</div>
+        {% endif %}
+        <small class="form-text text-muted">Maximum amount allowed: ${{ remaining_amount }}</small>
+    </div>
+    
+    <div class="form-group">
+        <label for="id_description">Description:</label>
+        {{ form.description }}
+        {% if form.description.errors %}
+        <div class="error">{{ form.description.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <button type="submit">Process Payment</button>
+</form>
+
+<a href="{% url 'vc_app:virtual_card_list' %}" class="button">Back to Virtual Cards</a>
+{% endblock %} 

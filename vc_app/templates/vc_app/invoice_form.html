@@ -1,0 +1,30 @@
+{% extends 'vc_app/base.html' %}
+
+{% block title %}Create Invoice{% endblock %}
+
+{% block content %}
+<h1>Create New Invoice</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_invoice_number">Invoice Number:</label>
+        {{ form.invoice_number }}
+        {% if form.invoice_number.errors %}
+        <div class="error">{{ form.invoice_number.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_amount">Amount:</label>
+        {{ form.amount }}
+        {% if form.amount.errors %}
+        <div class="error">{{ form.amount.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <button type="submit">Create Invoice</button>
+</form>
+
+<a href="{% url 'vc_app:invoice_list' %}" class="button">Back to Invoices</a>
+{% endblock %} 

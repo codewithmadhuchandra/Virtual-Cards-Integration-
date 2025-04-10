@@ -1,0 +1,38 @@
+{% extends 'vc_app/base.html' %}
+
+{% block title %}Create Virtual Card{% endblock %}
+
+{% block content %}
+<h1>Create Virtual Card for Invoice {{ invoice.invoice_number }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_card_number">Card Number:</label>
+        {{ form.card_number }}
+        {% if form.card_number.errors %}
+        <div class="error">{{ form.card_number.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_expiry_date">Expiry Date:</label>
+        {{ form.expiry_date }}
+        {% if form.expiry_date.errors %}
+        <div class="error">{{ form.expiry_date.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_cvv">CVV:</label>
+        {{ form.cvv }}
+        {% if form.cvv.errors %}
+        <div class="error">{{ form.cvv.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <button type="submit">Create Virtual Card</button>
+</form>
+
+<a href="{% url 'vc_app:invoice_list' %}" class="button">Back to Invoices</a>
+{% endblock %} 
