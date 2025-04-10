@@ -19,7 +19,7 @@ A Django application that enables users to create virtual cards for invoices and
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/codewithmadhuchandra/Virtual-Cards-Integration-.git
 cd vc_mm
 ```
 
@@ -84,15 +84,3 @@ python manage.py runserver
   - `settings.py` - Django settings
   - `urls.py` - Main URL configuration
 
-## Security Notes
-
-- This is a development version. For production:
-  - Change the SECRET_KEY in settings.py
-  - Set DEBUG = False
-  - Use a production-grade database
-  - Implement proper user authentication
-  - Use HTTPS
-
-## License
-
-This project is licensed under the MIT License. 
